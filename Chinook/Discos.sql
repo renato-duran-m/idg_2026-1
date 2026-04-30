@@ -94,41 +94,8 @@ ON tr."GenreId" = ge."GenreId"
 
 --Cuano es el valor promedio de las facturas
 
-SELECT AVG ("Total") AS "Gabo wn"
-FROM "Invoice" 
+SELECT inv."Tota"
+FROM "Invoice" AS inv
 
-----------------------------------------------------------------------------------------------------
 
---Obtener facturas mayores al promedio
 
-SELECT *
-FROM "Invoice"
-WHERE "Total" > 5.65
-ORDER BY "Total" DESC -- hardcode
-
---Promedio dinámico
-SELECT *
-FROM "Invoice"
-WHERE "Total" > (
-SELECT AVG ("Total") AS "Gabo wn"
-FROM "Invoice" 
-)
-
---Pistas mas largar 	ue el promedio
-
-SELECT *
-FROM "Track"
-WHERE "Milliseconds" > (
-SELECT AVG ("Milliseconds") AS "Gabo wn"
-FROM "Track" 
-)
-
---Encontrar clientes (por ID) que tienen mas gastos que el promeio
-
-SELECT "CustomerId", sum ("Total")
-FROM "Invoice" 
-GROUP BY "CustomerId"
-HAVING (SUM("Total"))  > (SELECT AVG ("Total") AS "Gabo wn"
-FROM "Invoice"
-)
-ORDER BY "sum" DESC
